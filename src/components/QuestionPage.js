@@ -5,7 +5,7 @@ import { setQuestionState } from "../actions/questionState";
 
 
 class QuestionPage extends Component {
-  handleSubmit = (e) => {
+  handleSubmit = () => {
     let answer = ""
     if (document.getElementById("optionOne").checked) {
       answer = "optionOne"
