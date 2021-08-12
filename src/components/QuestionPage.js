@@ -22,21 +22,32 @@ class QuestionPage extends Component {
   };
 
   render() {
-    const { question, authedUser } = this.props;
-    console.log(question);
+    const { question, authedUser , usersLength} = this.props;
+    const optionOnePercent = (question.optionOne.votes.length / usersLength) * 100
+    const optionTwoPercent = (question.optionTwo.votes.length / usersLength) * 100
+
     return (
       <div>
         {this.props.questionState === "true" && (
           <div>
             <h3>Would You Rather</h3>
-            <p> {question.optionOne.text} </p>
+            <div>
+            <span> {question.optionOne.text} </span> &nbsp;
+            <span>{question.optionOne.votes.length}</span> &nbsp;
+            <span>{optionOnePercent} %</span> &nbsp;
+
             {question.optionOne.votes.includes(authedUser) && (
               <span>selected</span>
             )}
-            <p> {question.optionTwo.text} </p>
+            </div>
+            <div>
+            <span> {question.optionTwo.text} </span> &nbsp;
+            <span>{question.optionTwo.votes.length}</span> &nbsp;
+            <span>{optionTwoPercent} %</span> &nbsp;
             {question.optionTwo.votes.includes(authedUser) && (
               <span>selected</span>
             )}
+            </div>
           </div>
         )}
 
@@ -66,7 +77,7 @@ class QuestionPage extends Component {
     );
   }
 }
-function mapStateToProps({ authedUser, questions, questionState }, props) {
+function mapStateToProps({ authedUser, questions, questionState , users}, props) {
   const { id } = props.match.params;
 
   return {
@@ -74,6 +85,7 @@ function mapStateToProps({ authedUser, questions, questionState }, props) {
     question: questions[id],
     authedUser: authedUser,
     questionState,
+    usersLength: Object.keys(users).length
   };
 }
 

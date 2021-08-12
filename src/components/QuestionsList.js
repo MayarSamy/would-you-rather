@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class QuestionsList extends Component {
   state = {
@@ -25,6 +25,7 @@ class QuestionsList extends Component {
         <div className="question">
           <div className="question-info center">
             <h5 className="center"> Would You Rather </h5>
+            <img src= {avatar} alt={author}></img>
             <p> {question.optionOne.text} </p>
             <p> OR </p>
             <p>{question.optionTwo.text} </p>

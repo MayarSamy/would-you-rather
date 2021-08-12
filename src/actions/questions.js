@@ -1,4 +1,3 @@
-import questions from "../reducers/questions";
 import { saveQuestion , saveQuestionAnswer} from "../utils/api";
 import { createNewQuestion , addAnswer} from "./users";
 
