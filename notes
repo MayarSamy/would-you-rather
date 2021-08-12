@@ -1,0 +1,5 @@
+when routes are added :
+    *   in questionslist component i need to make the design different to show the authour name , avatar , would you rather , option one , option two , view question button
+    *   in questionpage i need to make different design for answered component that shows authour , avatar , would you rather , option one and number of votes (%) , option two and number of votes (%)
+    *   in questionpage i need to make different design for unanswered component that shows authour , avatar 
+    *   in leaderBoard page i need to sort result 
