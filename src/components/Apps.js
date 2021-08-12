@@ -12,7 +12,7 @@ import ProtectedRoute from "../protectedRoute"
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData());
+    this.props.handleInitialData();
   }
   render() {
     return (
@@ -23,7 +23,7 @@ class App extends Component {
             <div>
               <Route path="/" exact component={Login} />
               <ProtectedRoute path="/home" exact component={Home} />
-              <ProtectedRoute path="/question/:id" exact component={QuestionPage} />
+              <ProtectedRoute path="/questions/:id" exact component={QuestionPage} />
               <ProtectedRoute path="/add" exact component={NewQuestion} />
               <ProtectedRoute path="/leaderboard" exact component={LeaderBoard} />
             </div>
@@ -33,4 +33,4 @@ class App extends Component {
     );
   }
 }
-export default connect()(App);
+export default connect(null, { handleInitialData })(App);

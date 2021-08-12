@@ -11,20 +11,18 @@ class LeaderBoard extends Component {
     return (
       <div>
         {users.map((user) => (
-          <div className="question">
+          <div className="question"  key= {user.id}>
             <div className="question-info">
               <p>{user.name}</p> &nbsp;
               <p>
                 Answered Questions: {user.answered}
               </p>
-              &nbsp;
-              <p>Asked Questions: {user.asked}</p>
-            </div>
-
-            <div className="question-info">
+              
               <p>
-                Score :
-                {user.score}
+                Asked Questions: {user.asked}
+              </p>
+              <p>
+                Score : {user.score}
               </p>
             </div>
           </div>

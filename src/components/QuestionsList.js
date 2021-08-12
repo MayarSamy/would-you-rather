@@ -18,7 +18,7 @@ class QuestionsList extends Component {
     const { question, author, avatar } = this.props;
     const { id, toQuestion } = this.state;
     if (toQuestion === true) {
-      return <Redirect to={`/question/${id}`} />;
+      return <Redirect to={`/questions/${id}`} />;
     }
     return (
       <div className="answered">
