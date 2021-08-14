@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {handleAnswerQuestion} from "../actions/questions"
 import { setQuestionState } from "../actions/questionState";
-
+import { Redirect } from "react-router-dom";
 
 class QuestionPage extends Component {
   handleSubmit = () => {
@@ -25,7 +25,7 @@ class QuestionPage extends Component {
     const { questions, authedUser , usersLength, id} = this.props;
     const question = questions[id]
     if (!question) {
-      this.props.history.push("/404")
+      return <Redirect to="/404"/>
     }
     else {
       const optionOnePercent = (question.optionOne.votes.length / usersLength) * 100
