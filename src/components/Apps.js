@@ -8,6 +8,7 @@ import QuestionPage from "./QuestionPage";
 import NewQuestion from "./NewQuestion";
 import LeaderBoard from "./LeaderBoard";
 import Nav from "./Nav";
+import Page404 from "./PageNotFound";
 import ProtectedRoute from "../protectedRoute"
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
               <ProtectedRoute path="/questions/:id" exact component={QuestionPage} />
               <ProtectedRoute path="/add" exact component={NewQuestion} />
               <ProtectedRoute path="/leaderboard" exact component={LeaderBoard} />
+              <Route path="/404" exact component={Page404} />
             </div>
           </div>
         </Fragment>

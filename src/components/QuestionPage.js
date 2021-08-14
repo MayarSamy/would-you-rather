@@ -22,59 +22,66 @@ class QuestionPage extends Component {
   };
 
   render() {
-    const { question, authedUser , usersLength} = this.props;
-    const optionOnePercent = (question.optionOne.votes.length / usersLength) * 100
-    const optionTwoPercent = (question.optionTwo.votes.length / usersLength) * 100
-
-    return (
-      <div>
-        {this.props.questionState === "true" && (
-          <div>
-            <h3>Would You Rather</h3>
+    const { questions, authedUser , usersLength, id} = this.props;
+    const question = questions[id]
+    if (!question) {
+      this.props.history.push("/404")
+    }
+    else {
+      const optionOnePercent = (question.optionOne.votes.length / usersLength) * 100
+      const optionTwoPercent = (question.optionTwo.votes.length / usersLength) * 100
+     
+      return (
+        <div>
+          {this.props.questionState === "true" && (
             <div>
-            <span> {question.optionOne.text} </span> &nbsp;
-            <span>{question.optionOne.votes.length}</span> &nbsp;
-            <span>{optionOnePercent} %</span> &nbsp;
-
-            {question.optionOne.votes.includes(authedUser) && (
-              <span>selected</span>
-            )}
+              <h3>Would You Rather</h3>
+              <div>
+              <span> {question.optionOne.text} </span> &nbsp;
+              <span>{question.optionOne.votes.length}</span> &nbsp;
+              <span>{optionOnePercent} %</span> &nbsp;
+  
+              {question.optionOne.votes.includes(authedUser) && (
+                <span>selected</span>
+              )}
+              </div>
+              <div>
+              <span> {question.optionTwo.text} </span> &nbsp;
+              <span>{question.optionTwo.votes.length}</span> &nbsp;
+              <span>{optionTwoPercent} %</span> &nbsp;
+              {question.optionTwo.votes.includes(authedUser) && (
+                <span>selected</span>
+              )}
+              </div>
             </div>
+          )}
+  
+          {this.props.questionState === "false" && (
             <div>
-            <span> {question.optionTwo.text} </span> &nbsp;
-            <span>{question.optionTwo.votes.length}</span> &nbsp;
-            <span>{optionTwoPercent} %</span> &nbsp;
-            {question.optionTwo.votes.includes(authedUser) && (
-              <span>selected</span>
-            )}
+              <h3>Would You Rather</h3>
+              <form onSubmit={this.handleSubmit}>
+                <input
+                  type="radio"
+                  id="optionOne"
+                  value={question.optionOne.text}
+                />
+                <label>{question.optionOne.text}</label>
+                <br />
+                <p> OR </p>
+                <input
+                  type="radio"
+                  id="optionTwo"
+                  value={question.optionTwo.text}
+                />
+                <label>{question.optionTwo.text}</label> <br />
+                <button> Submit Answer</button>
+              </form>
             </div>
-          </div>
-        )}
-
-        {this.props.questionState === "false" && (
-          <div>
-            <h3>Would You Rather</h3>
-            <form onSubmit={this.handleSubmit}>
-              <input
-                type="radio"
-                id="optionOne"
-                value={question.optionOne.text}
-              />
-              <label>{question.optionOne.text}</label>
-              <br />
-              <p> OR </p>
-              <input
-                type="radio"
-                id="optionTwo"
-                value={question.optionTwo.text}
-              />
-              <label>{question.optionTwo.text}</label> <br />
-              <button> Submit Answer</button>
-            </form>
-          </div>
-        )}
-      </div>
-    );
+          )}
+        </div>
+      );
+    }
+    
   }
 }
 function mapStateToProps({ authedUser, questions, questionState , users}, props) {
@@ -82,7 +89,7 @@ function mapStateToProps({ authedUser, questions, questionState , users}, props)
 
   return {
     id: id,
-    question: questions[id],
+    questions: questions,
     authedUser: authedUser,
     questionState,
     usersLength: Object.keys(users).length

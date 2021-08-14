@@ -6,7 +6,7 @@ import { Redirect } from "react-router-dom";
 class Login extends Component {
   state = {
     authedUser: "",
-    toHome: false,
+    toPage : false,
   };
   
 
@@ -26,15 +26,16 @@ class Login extends Component {
       const { dispatch } = this.props;
       dispatch(setAuthedUser(authedUser));
       this.setState(() => ({
-        toHome: true,
+        toPage: true,
       }));
     }
     
   };
 
   render() {
-    if (this.state.toHome === true) {
-      return <Redirect to="/home" />;
+    const {from} = this.props.location.state || {from: {pathname: "/home"}}
+    if (this.state.toPage === true) {
+      return <Redirect to={from} />;
     }
     return (
       <div>
